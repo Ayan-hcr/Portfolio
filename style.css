@@ -153,7 +153,7 @@ body {
     /* Global background image for the site with a semi-transparent overlay
       to improve text readability. Place your image at `assets/index_background.jpg`. */
     background-image: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
-                url('assets/index_background.jpg');
+                      url('assets/pic_1.png');
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
