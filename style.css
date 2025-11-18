@@ -150,15 +150,6 @@ button.normal:hover {
 body {
   width: 100%;
   background-color: #2d2e32;
-    /* Global background image for the site with a semi-transparent overlay
-      to improve text readability. Place your image at `assets/index_background.jpg`. */
-    background-image: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
-                      url('assets/pic_1.png');
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-  /* Use scroll attachment to ensure smooth scrolling on mobile and all devices. */
-  background-attachment: scroll;
   font-family: 'CyberAlert', sans-serif;
 }
 
@@ -187,7 +178,7 @@ body::selection {
 
 /* ---------- SECTION HEADER ---------- */
 #header {
-  padding: 20px 40px;
+  padding: 10px 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -196,10 +187,14 @@ body::selection {
   box-shadow: 0 0 10px 1px #00000040;
   backdrop-filter: blur(15px);
   color: #fefefe;
-  position: sticky;
-  z-index: 1;
+  /* Make the navbar always stay at the top of the viewport */
+  position: fixed;
   top: 0;
   left: 0;
+  width: 100%;
+  /* expose an estimated header height for layout adjustments below */
+  --header-height: 72px;
+  z-index: 10000; /* keep it above other elements */
   margin: 0;
 }
 
@@ -211,16 +206,9 @@ body::selection {
 .title-first-name {
   padding: 0 7.5px;
   font-weight: 600;
-  color: #fefefe;
-  font-family: "Raleway", sans-serif;
-  font-size: 24px;
-}
-
-.title-last-name {
-  font-size: 24px;
-  font-weight: 400;
-  color: #cacaca;
-  font-family: "Raleway", sans-serif;
+  color: #f30505;
+  font-family: "Raleway", 'Times New Roman', Times, serif;
+  font-size: 28px;
 }
 
 .navbar-menu {
@@ -241,9 +229,9 @@ body::selection {
 }
 
 .navbar-menu li a {
-  color: #fefefe;
+  color: #05e12a;
   text-decoration: none;
-  font-size: 12px;
+  font-size: 16px;
   font-weight: 600;
   transition: 0.3s ease;
 }
@@ -298,16 +286,63 @@ body::selection {
 /* ---------- SECTION BODY CONTENT ---------- */
 #content-body {
   display: flex;
-  background-color: #2d2e32;
+  position: relative; /* anchor absolute children (developer intro) */
+  /* Use the page background only for the hero/content area. Keeps a semi-transparent overlay for readability. */
+  background-image: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('assets/pic_1.png');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-color: #2d2e32; /* fallback color */
   align-items: flex-start;
-  height: 90vh;
+  height: 100vh;
   align-content: center;
   align-items: center;
-  justify-content: space-around;
-  padding: 100px 0 0 100px;
+  /* Anchor hero content to the left of the page */
+  justify-content: flex-start;
+  /* reduce left padding so the content sits closer to the left edge */
+  padding: calc(var(--header-height) + 10px) 0 0 60px;
   margin-bottom: 10vh;
   max-height: 100vh;
 }
+/* ---------- HERO: Left-align text ---------- */
+/* Override centering for hero area so all text sits on the left side */
+#content-body .developer-intro,
+#content-body .body-title,
+#content-body .body-tail {
+  align-items: flex-start;
+  justify-content: flex-start;
+  text-align: left;
+}
+
+#content-body .developer-intro p,
+#content-body .body-title h1,
+#content-body .body-title p,
+#content-body h2,
+#content-body .body-tail p {
+  text-align: left;
+}
+
+/* Position developer intro at the top-center of the hero */
+#content-body .developer-intro {
+  position: absolute;
+  /* place the intro directly at the top of the hero padding so it's under the navbar */
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  z-index: 20; /* ensure it's above hero content */
+}
+
+/* Reduce spacing in developer intro so it fits in the top bar */
+#content-body .developer-intro p {
+  margin: 0;
+  padding: 4px 8px;
+}
+
 #aboutme {
   display: flex;
   background-color: #25262a;
@@ -320,12 +355,48 @@ body::selection {
   max-height: none;
 }
 
+/* ---------- ABOUT: background image ---------- */
+/* Use assets/pic_4.jpg as the background for the About section with a dark overlay
+   to keep text readable. Place the image at `assets/pic_4.jpg`. */
+#aboutme {
+  background-image: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('assets/pic_4.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+}
+
+/* Add horizontal gap between the about image and the textual information */
+#aboutme .image-container {
+  margin-right: 40px;
+}
+
+@media (max-width: 992px) {
+  /* On narrower screens remove the horizontal gap and add vertical spacing */
+  #aboutme .image-container {
+    margin-right: 0;
+    margin-bottom: 24px;
+  }
+}
+
 /* Research section custom spacing */
 #research {
   margin-top: 0;
   padding-top: 0;
   padding-bottom: 80px;
   position: relative;
+}
+
+/* ---------- ACHIEVEMENTS: background image ---------- */
+/* Use assets/pic_3.png as the background for the Achievements section.
+   Add a dark overlay to improve text contrast. Place the image at
+   `assets/pic_3.png`. */
+#research {
+  background-image: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url('assets/pic_3.png');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
 }
 
 /* Removed enhanced research styles to restore the previous simple design */
@@ -385,7 +456,7 @@ body::selection {
   margin: 0 20px 0 0;
   background-color: #64f4ac;
   color: #2d2e32;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 600;
   border-radius: 2.5px;
   align-items: center;
@@ -460,6 +531,37 @@ body::selection {
   display: block;
 }
 
+/* ---------- ABOUT: round photo ---------- */
+/* Make the image in the About section circular with a subtle border and shadow */
+/* Use a square container and clip it to a circle to guarantee a perfect circular photo */
+#aboutme .svg-animation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  overflow: hidden; /* clip child image to circle */
+  box-shadow: 0 8px 24px rgba(0,0,0,0.45);
+  border: 3px solid rgba(255,255,255,0.06);
+}
+
+/* Make the image fill the square container and cover it (cropping if needed) */
+#aboutme .svg-animation .responsive-svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  #aboutme .svg-animation {
+    width: 180px;
+    height: 180px;
+  }
+}
+
+
 /* Media queries for further adjustments */
 @media (max-width: 1200px) {
   .svg-animation {
@@ -490,7 +592,12 @@ body::selection {
   position: relative;
   justify-content: space-between;
   padding: 100px;
-  background-color: #2d2e3273;
+  /* Background image for Projects section (assets/pic_5.jpg). Add overlay for readability. */
+  background-image: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('assets/pic_5.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
   min-height: 95vh;
   align-items: center;
 }
@@ -499,9 +606,59 @@ body::selection {
   position: relative;
   justify-content: space-between;
   padding: 100px;
-  background-color: #25262a;
+  /* Background image for Skills section (assets/pic_6.jpg) with overlay for readability */
+  background-image: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('assets/pic_6.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
   min-height: 95vh;
   align-items: center;
+}
+
+/* Right-align textual content inside the Skills section */
+#skill .cards-container {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding-right: 20px;
+}
+
+#skill .cards-container .design-card {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+#skill .cards-container h3,
+#skill .cards-container p,
+#skill .cards-container .section-heading {
+  text-align: right;
+}
+
+/* Ensure image container stays visually to the left */
+#skill .image-container {
+  padding-left: 20px;
+}
+
+/* Responsive: stack and left-align on smaller viewports */
+@media (max-width: 992px) {
+  #skill {
+    padding: 80px 20px;
+    flex-direction: column;
+    align-items: center;
+  }
+  #skill .cards-container {
+    text-align: left;
+    align-items: flex-start;
+    padding-right: 0;
+    width: 100%;
+  }
+  #skill .image-container {
+    padding-left: 0;
+    margin-bottom: 24px;
+    width: 100%;
+  }
 }
 .heading-container h3 {
   text-align: center;
