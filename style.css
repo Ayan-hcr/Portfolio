@@ -591,7 +591,7 @@ body::selection {
   display: flex;
   position: relative;
   /* Anchor project content to the right */
-  justify-content: flex-end;
+  justify-content: flex-start;
   padding: 100px 60px;
   /* Background image for Projects section (assets/pic_5.jpg). Add overlay for readability. */
   background-image: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('assets/pic_5.jpg');
@@ -605,7 +605,7 @@ body::selection {
 
 /* Keep text left-aligned, but align cards to the right within the container */
 #introduction .cards-container {
-  text-align: left; /* Text remains left-aligned */
+  text-align: right; /* Text remains left-aligned */
   display: flex;
   flex-direction: column;
   align-items: flex-end; /* Aligns the cards themselves to the right */
@@ -701,8 +701,9 @@ body::selection {
   color: #7c7d81;
   font-weight: 400;
   margin: 0;
-  top: -10px;
+  text-align: center;
 }
+
 
 .section-heading {
   font-size: 36px;
@@ -864,7 +865,7 @@ body::selection {
   border: none;
   background-color: #64f4ac;
   cursor: pointer;
-  color: #25262a;
+  color: #252a26;
   font-size: 16px;
   font-weight: 600;
   transition: 0.3s ease;
@@ -893,7 +894,7 @@ body::selection {
 
 .footer-email-intro p {
   font-size: 12px;
-  color: #7c7d81;
+  color: #fa0101;
   font-weight: 600;
 }
 
@@ -1055,7 +1056,7 @@ body::selection {
 
 
 /* Mobile devices */
-@media (max-width: 768px) {
+@media (max-width: 500px) {
   #header {
     flex-direction: column;
     align-items: flex-start;
@@ -1071,7 +1072,7 @@ body::selection {
   }
   .navbar-menu-container {
     display: none;
-    width: 100%;
+    width: 50%;
   }
   .navbar-menu {
     flex-direction: column;
