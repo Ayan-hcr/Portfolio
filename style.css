@@ -590,16 +590,35 @@ body::selection {
 #introduction {
   display: flex;
   position: relative;
-  justify-content: space-between;
-  padding: 100px;
+  /* Anchor project content to the right */
+  justify-content: flex-end;
+  padding: 100px 60px;
   /* Background image for Projects section (assets/pic_5.jpg). Add overlay for readability. */
   background-image: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('assets/pic_5.jpg');
   background-size: cover;
-  background-position: center center;
+  background-position: center center; /* Keeps the image centered; if you want it aligned left, change to 'left center' */
   background-repeat: no-repeat;
   background-attachment: scroll;
   min-height: 95vh;
-  align-items: center;
+  align-items: flex-start; /* Keeps items aligned to the top */
+}
+
+/* Keep text left-aligned, but align cards to the right within the container */
+#introduction .cards-container {
+  text-align: left; /* Text remains left-aligned */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; /* Aligns the cards themselves to the right */
+  padding-left: 20px;
+  padding-right: 0;
+}
+
+
+
+#introduction .cards-container h3,
+#introduction .cards-container p,
+#introduction .section-heading {
+  text-align: left;
 }
 #skill {
   display: flex;
@@ -616,29 +635,32 @@ body::selection {
   align-items: center;
 }
 
-/* Right-align textual content inside the Skills section */
+/* Left-align textual content inside the Skills section and place cards at the left edge */
 #skill .cards-container {
-  text-align: right;
+  text-align: left;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  padding-right: 20px;
+  align-items: flex-end; /* align cards to the left edge of the column */
+  padding-right: 0;
+  width: 520px; /* control column width (adjust as needed) */
 }
 
 #skill .cards-container .design-card {
-  margin-left: 0;
-  margin-right: 0;
+  margin-left: 180%;
+  margin-right: 0%;
+  width: 100%;
 }
 
 #skill .cards-container h3,
 #skill .cards-container p,
 #skill .cards-container .section-heading {
-  text-align: right;
+  text-align: left;
 }
 
-/* Ensure image container stays visually to the left */
+/* Ensure image container (if present) sits to the right of the left-aligned text */
 #skill .image-container {
   padding-left: 20px;
+  padding-right: 0;
 }
 
 /* Responsive: stack and left-align on smaller viewports */
@@ -1029,6 +1051,8 @@ body::selection {
     padding: 30px 10%;
   }
 }
+/*------------------------------------------------------------------------*/
+
 
 /* Mobile devices */
 @media (max-width: 768px) {
