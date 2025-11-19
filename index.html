@@ -5,13 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Ayan Kumar Kundu — Security Enthusiast | Linux Learner | Backend Developer</title>
     <meta name="description" content="Ayan Kumar Kundu — Cyber Security student. Projects: EduSync (Timetable generator & smart education system) and more." />
-    <!-- social preview placeholders -->
-    <meta property="og:title" content="Ayan Kumar Kundu — Portfolio" />
-    <meta property="og:description" content="Security Enthusiast | Linux Learner | Backend Developer" />
     <link rel="icon" href="assets/cyber.svg" type="image/svg+xml">
-    <!-- keep your style.css (from uploaded file) -->
     <link rel="stylesheet" href="style.css">
-    <!-- Font Awesome CDN (fallback to ensure icons load) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <script src="https://kit.fontawesome.com/e674bba739.js" crossorigin="anonymous"></script>
 </head>
@@ -40,15 +35,11 @@
         <div class="social-media-container">
             <ul class="social-media">
                 <li><i class="fa-brands fa-github"></i><a href="https://github.com/ayan048-hcr" id="ayan048-hcr">GitHub</a></li>
-                <li><i class="fa-brands fa-linkedin-in"></i><a href="https://www.linkedin.com/in/ayan-kundu-b621a1321?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BaUu3FCC3Q3Gzq0ug1hXX0w%3D%3D" id="linkedin.com/in/ayan-kundu-b621a1321">LinkedIn</a></li>
-                <li><i class="fa-regular fa-envelope"></i><a href="https://mail.google.com/mail/?view=cm&fs=1&to=ayankrkundu25@gmail.com" target="_blank">Email</a></li>
-
-
+                <li><i class="fa-brands fa-linkedin-in"></i><a href="https://www.linkedin.com/in/ayan-kundu-b621a1321" id="linkedin">LinkedIn</a></li>
+                <li><i class="fa-regular fa-envelope"></i><a href="mailto:ayankrkundu25@gmail.com" target="_blank">Email</a></li>
             </ul>
         </div>
     </section>
-
-    
 
     <!-- HERO / INTRO -->
     <section id="content-body">
@@ -233,7 +224,7 @@
             <form name="contactus" method="POST" action="#">
                 <h2 class="techy-title">💬 Let's make something amazing together</h2>
 
-                <div class="email-form">
+                <div class="email-form" id="emailForm">
                     <h2 class="creative-title">Start by <span>saying hi</span> 👋</h2>
 
                     <label for="name">Your name</label>
@@ -242,11 +233,13 @@
                     <label for="email">Email Address</label>
                     <input type="email" name="email" id="email" placeholder="Email Address" required>
 
-                    <div>
-                        <label for="message" class="message-label">Message</label>
+                    <label for="message">Message</label>
+                    <div class="message-row">
                         <textarea name="message" id="message" placeholder="Message" required></textarea>
-                        <button type="submit">Send</button>
+                        <button type="submit" id="sendBtn">Send</button>
                     </div>
+
+                    <div id="formMessage" aria-live="polite" style="display:none; margin-top:8px; font-weight:600;"></div>
                 </div>
             </form>
 
