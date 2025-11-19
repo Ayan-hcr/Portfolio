@@ -16,6 +16,7 @@ function scrollToTop() {
 }
 
 window.addEventListener('scroll', () => {
+  if (!scrollBtn) return;
   if (window.scrollY > 300) {
     scrollBtn.classList.add('visible');
   } else {
@@ -48,7 +49,6 @@ function updateHeaderHeightVar() {
   const header = document.getElementById('header');
   if (!header) return;
   const rect = header.getBoundingClientRect();
-  // Set CSS variable on :root so it's available everywhere
   document.documentElement.style.setProperty('--header-height', Math.ceil(rect.height) + 'px');
 }
 
@@ -56,5 +56,57 @@ window.addEventListener('DOMContentLoaded', updateHeaderHeightVar);
 window.addEventListener('load', updateHeaderHeightVar);
 window.addEventListener('resize', updateHeaderHeightVar);
 
-// Also run shortly after load in case fonts/images affect layout
 setTimeout(updateHeaderHeightVar, 500);
+
+
+/* -----------------------
+   Contact form handling
+   - prevents the default form POST to avoid HTTP 405 when hosted on static hosts
+   - opens the user's mail client using mailto: as a fallback
+   - shows an inline confirmation message
+   - can be swapped for an API endpoint (Formspree, Netlify Functions, etc.) later
+   ----------------------- */
+const contactForm = document.querySelector('form[name="contactus"]');
+if (contactForm) {
+  contactForm.addEventListener('submit', (e) => {
+    e.preventDefault(); // STOP the default POST (causes 405 on static hosts)
+
+    const name = (document.getElementById('name') || {}).value || '';
+    const email = (document.getElementById('email') || {}).value || '';
+    const message = (document.getElementById('message') || {}).value || '';
+    const formMessage = document.getElementById('formMessage');
+
+    // Basic validation
+    if (!name.trim() || !email.trim() || !message.trim()) {
+      if (formMessage) {
+        formMessage.style.display = 'block';
+        formMessage.style.color = '#ffcccb';
+        formMessage.textContent = 'Please fill all fields before sending.';
+      } else {
+        alert('Please fill all fields before sending.');
+      }
+      return;
+    }
+
+    // Build mailto fallback (so the user can still contact you without a server)
+    const subject = encodeURIComponent('Website contact from ' + name);
+    const body = encodeURIComponent(message + '\n\n— ' + name + '\n' + email);
+    const mailto = 'mailto:ayankrkundu25@gmail.com?subject=' + subject + '&body=' + body;
+
+    // Try to open user's mail client. If blocked, still show confirmation.
+    window.location.href = mailto;
+
+    if (formMessage) {
+      formMessage.style.display = 'block';
+      formMessage.style.color = '#64f4ac';
+      formMessage.textContent = 'Your mail client should open. If not, email: ayankrkundu25@gmail.com';
+    }
+
+    // Optional: clear form fields after a short delay
+    setTimeout(() => {
+      if (document.getElementById('name')) document.getElementById('name').value = '';
+      if (document.getElementById('email')) document.getElementById('email').value = '';
+      if (document.getElementById('message')) document.getElementById('message').value = '';
+    }, 800);
+  });
+}
