@@ -205,10 +205,10 @@ body::selection {
 
 .title-first-name {
   padding: 0 7.5px;
-  font-weight: 600;
+  font-weight: 1100;
   color: #f30505;
-  font-family: "Raleway", 'Times New Roman', Times, serif;
-  font-size: 28px;
+  font-family: "Montserrat", serif;
+  font-size: 28px; 
 }
 
 .navbar-menu {
