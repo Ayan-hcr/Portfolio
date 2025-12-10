@@ -1,3 +1,33 @@
+/**
+ * ============================================================================
+ * PORTFOLIO WEBSITE - GLOBAL STYLES & STRUCTURE
+ * ============================================================================
+ * This CSS file contains all styling for Ayan Kumar Kundu's portfolio website
+ * Main sections:
+ *   1. Global Reset & Fonts (lines 1-60)
+ *   2. Header/Navigation (lines 170-270)
+ *   3. Hero Section (lines 282-350)
+ *   4. About Section (lines 346-400)
+ *   5. Achievements Section (lines 400-430)
+ *   6. Projects Section (lines 553-580)
+ *   7. Skills Section (lines 582-620)
+ *   8. Footer Section (lines 745-850)
+ *   9. Responsive Media Queries (lines 1000-1200)
+ * ============================================================================
+ */
+
+/**
+ * ============================================================================
+ * GLOBAL STYLES & RESETS
+ * ============================================================================
+ * Purpose: Set base styles for entire page
+ * Includes:
+ *   - Import Google Fonts (Raleway, Source Code Pro)
+ *   - Reset default margins and padding on all elements
+ *   - Set default font family and box-sizing
+ *   - Configure scrolling behavior (smooth)
+ * ============================================================================
+ */
 @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&family=Source+Code+Pro:wght@200;300;400;500;600;700;800;900&display=swap");
 
 * {
@@ -49,6 +79,17 @@ html {
 }
 
 .scroll-to-top {
+  /**
+   * SCROLL-TO-TOP BUTTON STYLES
+   * Purpose: Floating button that appears when scrolling down, returns to top
+   * Properties:
+   *   - position: fixed → stays in bottom-right corner even while scrolling
+   *   - opacity: 0 → hidden by default
+   *   - visibility: hidden → not clickable when hidden
+   *   - background: gradient from green (#00b840) to light green (#00ff55)
+   *   - z-index: 1000 → appears on top of all other content
+   * ============================================================================
+   */
   position: fixed;
   bottom: 30px;
   right: 30px;
@@ -166,8 +207,19 @@ body::selection {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #fefefe;
-}
-
+}/**
+ * ============================================================================
+ * HEADER / NAVIGATION STYLES
+ * ============================================================================
+ * Purpose: Fixed navbar at top of page with responsive menu for mobile
+ * Key Features:
+ *   - position: fixed → stays at top while scrolling
+ *   - display: flex → uses flexbox for layout alignment
+ *   - backdrop-filter: blur(15px) → glassmorphism effect
+ *   - z-index: 10000 → appears above all content
+ *   - --header-height variable → used to offset page content below navbar
+ * ============================================================================
+ */
 #header {
   padding: 10px 40px;
   display: flex;
@@ -272,6 +324,23 @@ body::selection {
   font-weight: 800;
 }
 
+/**
+ * ============================================================================
+ * HERO / HOME SECTION STYLES (#content-body)
+ * ============================================================================
+ * Purpose: Main landing section with hero background, text, and intro badges
+ * Key Features:
+ *   - height: 100vh → takes full screen height
+ *   - background-image: layered gradient + pic_1.png → hero background with overlay
+ *   - display: flex → aligns content using flexbox
+ *   - padding-top: calc(var(--header-height) + 10px) → leaves space below fixed navbar
+ *   - position: relative → allows absolute positioning of developer-intro
+ * Components:
+ *   - .developer-intro → badges (Security Enthusiast, Linux Learner, Backend Developer)
+ *   - .body-title → main heading and description
+ *   - .body-tail → SIH and "1+ Major Projects" stats
+ * ============================================================================
+ */
 #content-body {
   display: flex;
   position: relative;
@@ -287,7 +356,7 @@ body::selection {
   align-items: center;
   justify-content: flex-start;
   padding: calc(var(--header-height) + 10px) 0 0 60px;
-  margin-bottom: 10vh;
+  margin-bottom: 0;
   max-height: 100vh;
 }
 
@@ -325,6 +394,20 @@ body::selection {
 }
 
 #aboutme {
+  /**
+   * ============================================================================
+   * ABOUT SECTION STYLES (#aboutme)
+   * ============================================================================
+   * Purpose: Introduce the portfolio owner with photo and bio text
+   * Key Features:
+   *   - display: flex → aligns image and text side-by-side
+   *   - background-image: pic_4.jpg with dark overlay → decorative background
+   *   - .svg-animation (image container) → made circular using border-radius: 50%
+   *   - .body-part-2 → left side contains the circular photo
+   *   - .body-part-1 → right side contains bio text
+   * Responsive: Stacks vertically on mobile (flex-direction: column)
+   * ============================================================================
+   */
   display: flex;
   background-color: #25262a;
   align-content: center;
@@ -684,6 +767,8 @@ body::selection {
   border-radius: 8px;
   box-shadow: 0 0 10px #00000040;
   transition: 0.5s ease;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .design-card:hover {
@@ -995,10 +1080,11 @@ body::selection {
 
   #content-body,
   #aboutme {
-    padding: 80px 20px;
+    padding: 40px 15px;
     flex-direction: column;
     height: auto;
     max-height: none;
+    margin-bottom: 0;
   }
 
   .developer-intro p {
@@ -1022,7 +1108,7 @@ body::selection {
 
   #footer {
     flex-direction: column;
-    padding: 50px 20px;
+    padding: 40px 20px;
     height: auto;
   }
 
@@ -1041,8 +1127,10 @@ body::selection {
 /* Mobile devices */
 @media (max-width: 768px) {
   #header {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 15px;
   }
   .menu-toggle {
     display: block;
@@ -1092,17 +1180,95 @@ body::selection {
   #aboutme,
   #introduction,
   #skill {
-    padding: 20px 10px;
+    padding-left: 10px;
+    padding-right: 10px;
     flex-direction: column;
+    margin-bottom: 0;
+  }
+  
+  #content-body {
+    padding-top: calc(var(--header-height, 72px) + 120px);
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 0;
+  }
+  
+  #content-body .developer-intro {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    margin-top: 40px;
+    margin-bottom: 30px;
+  }
+  
+  #aboutme,
+  #introduction {
+    padding-top: 30px;
+  }
+  
+  #introduction {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  
+  #research,
+  #skill {
+    padding-top: 20px;
+  }
+  
+  #aboutme,
+  #research,
+  #introduction,
+  #skill {
+    scroll-margin-top: calc(var(--header-height, 72px) + 30px);
   }
   .cards-container,
   .image-container {
     width: 100%;
     padding: 0;
   }
+  
+  #introduction .cards-container {
+    padding-left: 0;
+    padding-right: 0;
+    align-items: center;
+  }
+  
+  #introduction .design-card {
+    max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .design-card {
+    max-width: 100% !important;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+  
+  .design-card h3,
+  .design-card p {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+  
+  #introduction .cards-container,
+  #skill .cards-container {
+    margin-top: 40px;
+  }
+  
+  #skill .design-card {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    width: 100%;
+  }
   .design-card {
     max-width: 100%;
-    margin: 10px 0;
+    margin: 8px 0;
+    padding: 12px;
+    min-height: 110px;
   }
   .navbar-menu-container.active,
   .social-media-container.active {
@@ -1123,12 +1289,12 @@ body::selection {
     font-size: 14px;
   }
   h1 {
-    font-size: 30px;
-    line-height: 40px;
+    font-size: 28px;
+    line-height: 36px;
   }
   h2 {
-    font-size: 24px;
-    line-height: 32px;
+    font-size: 22px;
+    line-height: 30px;
   }
   h4 {
     font-size: 16px;
@@ -1154,14 +1320,21 @@ body::selection {
     max-height: none;
   }
   .developer-intro p {
-    font-size: 12px;
+    font-size: 11px;
+    padding: 3px 6px;
+    margin: 0 6px 0 0;
   }
   .body-title h1 {
-    font-size: 24px;
-    line-height: 32px;
+    font-size: 22px;
+    line-height: 30px;
+    padding: 15px 0 0 0;
   }
   .body-title p {
-    font-size: 12px;
+    font-size: 11px;
+    padding: 12px 0;
+  }
+  .body-title a {
+    font-size: 13px;
   }
   .cards-container,
   .image-container {
@@ -1170,7 +1343,7 @@ body::selection {
   }
   #footer {
     flex-direction: column;
-    padding: 30px 20px;
+    padding: 20px 12px;
     height: auto;
   }
   .footer-left,
@@ -1179,8 +1352,20 @@ body::selection {
   }
   .email-form {
     width: 100%;
-    padding: 20px;
- }
+    padding: 15px 5%;
+    height: auto;
+  }
+  .email-form h2 {
+    font-size: 22px;
+  }
+  .email-form input {
+    height: 32px;
+    font-size: 12px;
+  }
+  .email-form div button {
+    height: 32px;
+    font-size: 12px;
+  }
 }
 
 .developer-intro, .body-title {
@@ -1213,15 +1398,21 @@ body::selection {
   #introduction,
   #skill,
   #research {
-    padding: 20px 15px;
+    padding: 20px 8px;
+    min-height: auto;
   }
   
   .design-card {
     width: 100%;
     max-width: 100%;
-    margin: 10px 0;
-    padding: 15px;
+    margin: 6px 0;
+    padding: 10px;
     box-sizing: border-box;
+    min-height: 100px;
+  }
+  
+  .design-card p {
+    font-size: 11px;
   }
 }
 
@@ -1249,28 +1440,45 @@ body, html {
   
   .body-title h1 {
     font-size: 20px;
-    line-height: 28px;
+    line-height: 26px;
   }
   
   .developer-intro p {
-    font-size: 11px;
-    margin: 0 10px 0 0;
-    padding: 4px 8px;
+    font-size: 10px;
+    margin: 0 4px 0 0;
+    padding: 2px 4px;
   }
   
   #introduction,
   #skill,
   #research {
-    padding: 15px 10px;
+    padding: 15px 6px;
+    min-height: auto;
   }
   
   .cards-container {
-    padding: 0 5px;
+    padding: 0;
+    width: 100%;
   }
   
   .design-card {
-    padding: 12px;
-    margin: 8px 0;
+    padding: 8px;
+    margin: 4px 0;
+    min-height: 90px;
+  }
+  
+  .design-card p {
+    font-size: 10px;
+  }
+  
+  .design-card {
+    padding: 10px;
+    margin: 6px 0;
+    min-height: 100px;
+  }
+  
+  .design-card p {
+    font-size: 12px;
   }
 }
 
