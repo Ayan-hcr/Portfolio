@@ -1,4 +1,15 @@
-// menu toggle for mobile
+/**
+ * ============================================================================
+ * MOBILE MENU TOGGLE FUNCTION
+ * ============================================================================
+ * Purpose: Show/hide navigation menu and social media links on mobile devices
+ * How it works:
+ *   1. Gets the hamburger menu button element with ID 'menu-toggle'
+ *   2. Gets the navbar menu container with class '.navbar-menu-container'
+ *   3. Gets the social media container with class '.social-media-container'
+ *   4. When user clicks menu button, toggles 'active' class to show/hide menu
+ * ============================================================================
+ */
 const menuToggle = document.getElementById('menu-toggle');
 const navContainer = document.querySelector('.navbar-menu-container');
 const socialContainer = document.querySelector('.social-media-container');
@@ -8,7 +19,18 @@ menuToggle && menuToggle.addEventListener('click', () => {
   socialContainer.classList.toggle('active');
 });
 
-// scroll to top button
+/**
+ * ============================================================================
+ * SCROLL TO TOP BUTTON FUNCTION
+ * ============================================================================
+ * Purpose: Allow users to quickly scroll back to the top of the page
+ * How it works:
+ *   1. Gets the scroll-to-top button element with ID 'scrollToTop'
+ *   2. When button is clicked, smoothly scrolls page to top (position 0)
+ *   3. Button only appears when user scrolls down more than 300px
+ *   4. Listens to scroll events and adds/removes 'visible' class
+ * ============================================================================
+ */
 const scrollBtn = document.getElementById('scrollToTop');
 
 function scrollToTop() {
@@ -24,7 +46,19 @@ window.addEventListener('scroll', () => {
   }
 });
 
-// small greeting animation (rotating short phrases)
+/**
+ * ============================================================================
+ * GREETING TEXT ANIMATION FUNCTION
+ * ============================================================================
+ * Purpose: Rotate through different greeting phrases with fade effect
+ * How it works:
+ *   1. Gets the greeting text element with ID 'greetingText'
+ *   2. Creates array of 4 phrases to rotate through
+ *   3. Every 3 seconds (3000ms), changes to next phrase
+ *   4. Fades out text (opacity 0), changes text, then fades in (opacity 1)
+ *   5. Cycles through phrases in order: phrase 0 → 1 → 2 → 3 → back to 0
+ * ============================================================================
+ */
 const greeting = document.getElementById('greetingText');
 const phrases = [
   'Stay secure. Learn more.',
@@ -43,7 +77,19 @@ setInterval(() => {
   }, 300);
 }, 3000);
 
-// header height fix
+/**
+ * ============================================================================
+ * UPDATE HEADER HEIGHT VARIABLE FUNCTION
+ * ============================================================================
+ * Purpose: Calculate navbar height and update CSS variable for content spacing
+ * How it works:
+ *   1. Gets the header (navbar) element with ID 'header'
+ *   2. Measures the actual height of the navbar element
+ *   3. Stores this height in CSS variable '--header-height'
+ *   4. This ensures content sits properly below the fixed navbar
+ *   5. Updates on: page load, window resize, and every 500ms
+ * ============================================================================
+ */
 function updateHeaderHeightVar() {
   const header = document.getElementById('header');
   if (!header) return;
@@ -56,7 +102,24 @@ window.addEventListener('load', updateHeaderHeightVar);
 window.addEventListener('resize', updateHeaderHeightVar);
 setTimeout(updateHeaderHeightVar, 500);
 
-// contact form handling (opens Gmail directly)
+/**
+ * ============================================================================
+ * CONTACT FORM HANDLER FUNCTION
+ * ============================================================================
+ * Purpose: Validate contact form and open Gmail composer with pre-filled info
+ * How it works:
+ *   1. Gets the contact form (form with name="contactus")
+ *   2. When user submits form:
+ *      - Prevents default form submission (e.preventDefault)
+ *      - Gets user's name, email, and message from form fields
+ *      - Validates that all fields are filled
+ *      - If empty fields: shows error message "Please fill all fields..."
+ *      - If valid: creates Gmail compose URL with pre-filled subject & body
+ *      - Opens Gmail in a new tab with the user's information
+ *      - Shows success message "Gmail is opening in a new tab"
+ *      - Clears all form fields after 800ms
+ * ============================================================================
+ */
 const contactForm = document.querySelector('form[name="contactus"]');
 
 if (contactForm) {
